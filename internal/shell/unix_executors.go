@@ -4,4 +4,3 @@ package shell
 
 const SHELL = "bash"
 const EXEC = "-c"
-

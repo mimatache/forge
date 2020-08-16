@@ -1,9 +1,8 @@
 package manifest
 
-
-func InitializeDemoForge()Forge{
+func InitializeDemoForge() Forge {
 	return Forge{
-		Include:   []string{},
+		Include: []string{},
 		Forgeries: Forgeries{
 			{
 				Name:        "shouldSucceed",

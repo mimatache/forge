@@ -50,6 +50,6 @@ func init() {
 	if err != nil {
 		log.Fatal("Error getting working directory")
 	}
-	rootCmd.PersistentFlags().StringVarP(&forgeFile, "file", "f",filepath.Join(wd, "Forge") ,"Forge file (default is Forge in current directory)")
+	rootCmd.PersistentFlags().StringVarP(&forgeFile, "file", "f", filepath.Join(wd, "Forge"), "Forge file (default is Forge in current directory)")
 
 }

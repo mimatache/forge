@@ -6,7 +6,6 @@ import (
 	"strings"
 )
 
-
 type Exec func(command string) error
 
 type ForgeryName string
@@ -50,7 +49,6 @@ func (e forgeErrors) Error() string {
 type Forge struct {
 	Include   []string  `yaml:"include"`
 	Forgeries Forgeries `yaml:"forgeries"`
-
 }
 
 // Forgery defines forge action. A forge action consists of:
@@ -79,6 +77,6 @@ func (a Forgery) Validate() error {
 	return nil
 }
 
-func (a Forgery) Execute(execFunc Exec)(err error) {
+func (a Forgery) Execute(execFunc Exec) (err error) {
 	return execFunc(a.Cmd)
 }
