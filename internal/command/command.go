@@ -2,7 +2,7 @@ package command
 
 import (
 	"fmt"
-	"mimatache/github.com/forge/internal/manifest"
+	"github.com/mimatache/forge/internal/manifest"
 )
 
 func NewCommandList(forgeryName manifest.ForgeryName, forgeries map[manifest.ForgeryName]manifest.Forgery) (manifest.Forgeries, error) {
@@ -15,12 +15,12 @@ type executables struct {
 	commands manifest.Forgeries
 }
 
-func (e *executables) populateCommandList(forgeryName manifest.ForgeryName , forgeries map[manifest.ForgeryName]manifest.Forgery) error {
+func (e *executables) populateCommandList(forgeryName manifest.ForgeryName, forgeries map[manifest.ForgeryName]manifest.Forgery) error {
 	forgery, ok := forgeries[forgeryName]
 	if !ok {
 		return fmt.Errorf("undefined forgery requested: %s", forgeryName)
 	}
-	for _, v :=  range forgery.Pre {
+	for _, v := range forgery.Pre {
 		err := e.populateCommandList(v, forgeries)
 		if err != nil {
 			return err

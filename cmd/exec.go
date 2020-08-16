@@ -17,11 +17,11 @@ package cmd
 
 import (
 	"bytes"
+	"github.com/mimatache/forge/internal/manifest"
+	"github.com/mimatache/forge/internal/parse"
+	"github.com/mimatache/forge/internal/shell"
 	"github.com/spf13/cobra"
 	"log"
-	"mimatache/github.com/forge/internal/manifest"
-	"mimatache/github.com/forge/internal/parse"
-	"mimatache/github.com/forge/internal/shell"
 )
 
 // execCmd represents the exec command
@@ -48,7 +48,6 @@ A 'pre' forgery is any forge command that is `,
 			v.Execute(executor.Execute)
 		}
 
-
 	},
 }
 
@@ -56,6 +55,6 @@ func init() {
 	rootCmd.AddCommand(execCmd)
 }
 
-func makeMapOfForgeries(forgery ,in, out map[manifest.ForgeryName]manifest.Forgery ) {
+func makeMapOfForgeries(forgery, in, out map[manifest.ForgeryName]manifest.Forgery) {
 
 }

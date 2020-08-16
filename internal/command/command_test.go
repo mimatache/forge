@@ -1,7 +1,7 @@
 package command
 
 import (
-	"mimatache/github.com/forge/internal/manifest"
+	"github.com/mimatache/forge/internal/manifest"
 	"testing"
 
 	. "github.com/onsi/gomega"

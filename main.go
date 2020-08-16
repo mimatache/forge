@@ -15,7 +15,7 @@ limitations under the License.
 */
 package main
 
-import "mimatache/github.com/forge/cmd"
+import "github.com/mimatache/forge/cmd"
 
 func main() {
 	cmd.Execute()

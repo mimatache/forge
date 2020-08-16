@@ -2,9 +2,9 @@ package parse
 
 import (
 	"fmt"
+	"github.com/mimatache/forge/internal/manifest"
 	"gopkg.in/yaml.v2"
 	"io"
-	"mimatache/github.com/forge/internal/manifest"
 	"strings"
 	"testing"
 

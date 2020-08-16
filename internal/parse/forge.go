@@ -4,9 +4,8 @@ import (
 	"gopkg.in/yaml.v2"
 	"io"
 
-	"mimatache/github.com/forge/internal/manifest"
+	"github.com/mimatache/forge/internal/manifest"
 )
-
 
 type ForgeReader func(filePath string) (io.ReadCloser, error)
 
@@ -39,7 +38,6 @@ func GetForgeries(filePath string, reader ForgeReader) (forgeries map[manifest.F
 	return forgeries, nil
 }
 
-
 // addToForge adds a forge to a map only if the file is not already present in the map
 func addToForges(forges map[string]*manifest.Forge, filePath string, reader ForgeReader) (bool, error) {
 	_, ok := forges[filePath]
@@ -47,9 +45,9 @@ func addToForges(forges map[string]*manifest.Forge, filePath string, reader Forg
 		return false, nil
 	}
 	contents, err := reader(filePath)
-	defer func () {
+	defer func() {
 		_ = contents.Close()
-	} ()
+	}()
 	if err != nil {
 		return false, err
 	}
@@ -66,7 +64,7 @@ func addToForges(forges map[string]*manifest.Forge, filePath string, reader Forg
 }
 
 // mapForges adds all forge files to a map where the key is the file location and the value is the individual forge
-func mapForges(forges map[string]*manifest.Forge, filePath string, forgeReader ForgeReader) error{
+func mapForges(forges map[string]*manifest.Forge, filePath string, forgeReader ForgeReader) error {
 	ok, err := addToForges(forges, filePath, forgeReader)
 	if err != nil {
 		return err

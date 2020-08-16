@@ -17,16 +17,15 @@ package cmd
 
 import (
 	"fmt"
+	"github.com/mimatache/forge/internal/manifest"
 	"github.com/spf13/cobra"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"log"
-	"mimatache/github.com/forge/internal/manifest"
 	"os"
 )
 
 type Flag string
-
 
 const (
 	FORCE = "force"
@@ -36,7 +35,7 @@ const (
 var initCmd = &cobra.Command{
 	Use:   "init",
 	Short: "Creates a default Forge file",
-	Long: `Creates a default forge file that can also be used to verify forge executions`,
+	Long:  `Creates a default forge file that can also be used to verify forge executions`,
 	Run: func(cmd *cobra.Command, args []string) {
 		if _, err := os.Stat("Forge"); err == nil {
 			force, err := cmd.Flags().GetBool(FORCE)
@@ -69,6 +68,5 @@ var initCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(initCmd)
 
-
-	initCmd.Flags().Bool(FORCE,  false, "Force forge file creation. This will remove any existing forge files")
+	initCmd.Flags().Bool(FORCE, false, "Force forge file creation. This will remove any existing forge files")
 }

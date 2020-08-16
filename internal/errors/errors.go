@@ -2,7 +2,7 @@ package errors
 
 import (
 	"fmt"
-	"mimatache/github.com/forge/internal/manifest"
+	"github.com/mimatache/forge/internal/manifest"
 )
 
 type RecursiveCommand struct {
