@@ -12,19 +12,54 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
+  # Runs unit tests
   test:
-    # The type of runner that the job will run on
+    name: "Unit tests"
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
     - name: Setup Go environment
       uses: actions/setup-go@v2.1.2
       
-    # Runs a set of commands using the runners shell
     - name: Test
       run: |
-        go test ./...
+        go test -v -coverprofile=coverage.out ./...
+        go tool cover -func=coverage.out
+        go tool cover -html=coverage.out -o=report.html
+    
+    - name: Upload test results
+      uses: actions/upload-artifact@v2
+      with:
+        name: Coverage Report
+        path: report.html
+
+  # Runs the linter
+  golangci:
+    name: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v1
+
+
+  build:
+    name: Build Linux
+    needs: [test, golangci]
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Go environment
+        uses: actions/setup-go@v2.1.2
+
+      - run: go build -o _builds/linux/forge
+
+      - name: Executable
+        uses: actions/upload-artifact@v2
+        with:
+          name: Linux executable
+          path: _builds/linux/forge
+      
+      
