@@ -26,13 +26,13 @@ jobs:
         gotestsum_version: 0.4.1
 
     - name: Interact with gotestsum
-      run: gotestsum --format short-verbose --junitfile reports.xml
+      run: gotestsum --format short-verbose --junitfile TEST-reports.xml
 
     - uses: ashley-taylor/junit-report-annotations-action@master
       with:
         access-token: ${{ secrets.GITHUB_TOKEN }}
       if: always()
-      
+
   # Runs the linter
   golangci:
     name: lint
