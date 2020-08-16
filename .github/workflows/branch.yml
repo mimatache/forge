@@ -20,18 +20,19 @@ jobs:
     - name: Setup Go environment
       uses: actions/setup-go@v2.1.2
       
-    - name: Test
-      run: |
-        go test -v -coverprofile=coverage.out ./...
-        go tool cover -func=coverage.out
-        go tool cover -html=coverage.out -o=report.html
-    
-    - name: Upload test results
-      uses: actions/upload-artifact@v2
+    - name: Setup gotestsum
+      uses: autero1/action-gotestsum@v0.1.0
       with:
-        name: Coverage Report
-        path: report.html
+        gotestsum_version: 0.4.1
 
+    - name: Interact with gotestsum
+      run: gotestsum --format short-verbose --junitfile reports.xml
+
+    - uses: ashley-taylor/junit-report-annotations-action@master
+      with:
+        access-token: ${{ secrets.GITHUB_TOKEN }}
+      if: always()
+      
   # Runs the linter
   golangci:
     name: lint
