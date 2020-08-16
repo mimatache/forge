@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"gopkg.in/yaml.v2"
 	"io"
-	"mimatache/github.com/forge/internal/forge"
+	"mimatache/github.com/forge/internal/manifest"
 	"strings"
 	"testing"
 
