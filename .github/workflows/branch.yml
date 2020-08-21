@@ -20,18 +20,17 @@ jobs:
     - name: Setup Go environment
       uses: actions/setup-go@v2.1.2
       
-    - name: Setup gotestsum
-      uses: autero1/action-gotestsum@v0.1.0
+    - name: Test
+      run: |
+        go test -v -coverprofile=coverage.out ./...
+        go tool cover -func=coverage.out
+        go tool cover -html=coverage.out -o=report.html
+    
+    - name: Upload test results
+      uses: actions/upload-artifact@v2
       with:
-        gotestsum_version: 0.4.1
-
-    - name: Interact with gotestsum
-      run: gotestsum --format short-verbose --junitfile TEST-reports.xml
-
-    - uses: ashley-taylor/junit-report-annotations-action@master
-      with:
-        access-token: ${{ secrets.GITHUB_TOKEN }}
-      if: always()
+        name: Coverage Report
+        path: report.html
 
   # Runs the linter
   golangci:
@@ -44,5 +43,4 @@ jobs:
         with:
           # Required: the version of golangci-lint is required and must be specified without patch version: we always use the latest patch version.
           version: v1.29
-
-
+          
