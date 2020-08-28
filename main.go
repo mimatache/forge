@@ -15,13 +15,8 @@ limitations under the License.
 */
 package main
 
-import (
-	"fmt"
-
-	"github.com/mimatache/forge/cmd"
-)
+import "github.com/mimatache/forge/cmd"
 
 func main() {
-	fmt.Println("Hello World")
 	cmd.Execute()
 }
