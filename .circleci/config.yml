@@ -14,7 +14,7 @@ commands:
     steps:
       - run: 
           name: "gotestsum install"
-          command: go get -U gotest.tools/gotestsum
+          command: go get gotest.tools/gotestsum
       - run: 
           name: "create test results dir"
           command: mkdir -p test-results
