@@ -1,8 +1,16 @@
 
-version: 2
+version: 2.1
+
 commands:
+  greeting:
+      parameters:
+         to:
+           default: "world"
+           type: string
+      steps:
+         - run: echo "Hello <<parameters.to>>"
+
   test:
-    description: "Install build prerequisites"
     steps:
       - run: 
           name: "gotestsum install"
@@ -16,7 +24,6 @@ commands:
       - store_test_results:
           path: test-results
   lint:
-    description: "Lint package"
     steps:
       - run:
           name: "Install lint"
@@ -25,15 +32,11 @@ commands:
           name: "Run lint"
           command: golangci-lint run -E golint ./...
 
-  
-
-
 jobs:
   sanity:
     docker:
       # specify the version
       - image: circleci/golang:1.14
-
     working_directory: /go/src/github.com/curious-kitten/forge
     steps:
       - checkout
