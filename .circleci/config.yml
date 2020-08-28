@@ -23,14 +23,6 @@ commands:
           command: gotestsum --format dots --junitfile test-results/unit_tests.xml ./...
       - store_test_results:
           path: test-results
-  lint:
-    steps:
-      - run:
-          name: "Install lint"
-          command: curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.30.0
-      - run:
-          name: "Run lint"
-          command: golangci-lint run -E golint ./...
 
 jobs:
   sanity:
@@ -40,7 +32,6 @@ jobs:
     working_directory: /go/src/github.com/curious-kitten/forge
     steps:
       - checkout
-      - lint
       - test
       
 
